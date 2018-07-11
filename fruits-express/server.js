@@ -3,33 +3,20 @@ console.log("server.js is running...");
 
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
-// Require our model. The model should be capitalized.
-const Fruits = require("./models/fruits");
-
-
-
-
-// Creating the index route.
-// Index route should show all the fruits.rm
-app.get("/fruits", (req, res) => {
-	res.render("index.ejs", {
-		"fruitsList": Fruits
-	});
-});
+// Initialized some middleware
+// bodyParser allows us to read the contents of a form, or the body of a request.
+// The app.use sets up what middleware you are using
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride("_method"));
 
 
-// What we are trying to do is get to localhost:3000/fruits/0 --> apple.
-// We are going to use query params to act like a variable which can be sent over by the client.
-// This is called "express routing";
+const fruitController = require("./controllers/fruitControllers");
 
-// This is the show route --> This route always shows one item from the model.
-app.get("/fruits/:index", (req, res) => {
-	// Render is when you want to show an ejs template to the client.
-	res.render("show.ejs", {
-		"fruit": Fruits[req.params.index] // This creates a fruit varaible in the show page.
-	});
-});
+// This means every route in the fruit controller starts with /fruits/.
+app.use("/fruits/", fruitController);
 
 
 app.listen(3000, () => {

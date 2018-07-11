@@ -1,3 +1,5 @@
+<%console.log("index.ejs is running...");%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +10,17 @@
 <body>
 	<h1>Fruits Index Page</h1>
 
+	<a href="./new">Create New Fruit</a>
+
 	<% for (let i = 0; i < fruitsList.length; i++) { %>
-	<h3><a href="<%= i %>"><%= fruitsList[i].name %></a></h3>
+		<h3><a href="<%= i %>"><%= fruitsList[i].name %></a></h3>
+		<form method="POST" action="/fruits/<%=i%>?_method=DELETE">
+		<button>Delete <%=fruitsList[i].name%></button>
+		</form>
+		<a href="/fruits/<%=i%>/edit">Edit</a>
 	<% } %>
+
+
 
 </body>
 </html>
