@@ -14,10 +14,10 @@
 
 	<% for (let i = 0; i < fruitsList.length; i++) { %>
 		<h3><a href="<%= i %>"><%= fruitsList[i].name %></a></h3>
-		<form method="POST" action="/fruits/<%=i%>?_method=DELETE">
+		<form method="POST" action="/fruits/<%=fruitsList[i].id%>?_method=DELETE">
 		<button>Delete <%=fruitsList[i].name%></button>
 		</form>
-		<a href="/fruits/<%=i%>/edit">Edit</a>
+		<a href="/fruits/<%=fruitsList[i].id%>/edit">Edit</a>
 	<% } %>
 
 

@@ -6,6 +6,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
+// require our db
+require("./db/db");
+
 // Initialized some middleware
 // bodyParser allows us to read the contents of a form, or the body of a request.
 // The app.use sets up what middleware you are using
@@ -22,7 +25,6 @@ app.use("/fruits/", fruitController);
 app.listen(3000, () => {
 	console.log("server.js is listening on port 3000");
 });
-
 
 
 
